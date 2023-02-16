@@ -1,0 +1,27 @@
+server:
+  port: 9091
+  servlet:
+    context-path: /portal
+
+spring:
+  servlet:
+     multipart:
+        max-file-size:  -1
+        max-request-size: -1
+  # 微服务使用
+  application:
+    name: portal
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  main:
+    allow-circular-references: true
+  #多环境配置
+  profiles:
+    active: prod
+mybatis:
+    mapper-locations: classpath:mappers/*.xml
+    type-aliases-package: com.zgtech.portal.dao.entity
+    #开启驼峰命名
+    configuration:
+      map-underscore-to-camel-case: true

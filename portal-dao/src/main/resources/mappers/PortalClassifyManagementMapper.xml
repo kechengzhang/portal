@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zgtech.portal.dao.mapper.PortalClassifyMapper">
+  <insert id="savePortalClassify">
+    insert into portal_classify_management(name,checked_url,unchecked_url)
+    values (#{name,jdbcType=VARCHAR},#{checkedUrl} ,#{uncheckedUrl,jdbcType=VARCHAR} )
+  </insert>
+    <delete id="deleteClassify">
+      delete  from portal_classify_management
+      <where>
+          id =#{id}
+      </where>
+    </delete>
+  <select id="queryClassify" resultType="com.zgtech.portal.dao.entity.PortalClassifyDO">
+    select  id ,name,checked_url,unchecked_url from  portal_classify_management
+  </select>
+  <update id="updateClassify">
+    update portal_classify_management
+    set name =#{name},unchecked_url =#{uncheckedUrl},checked_url =#{checkedUrl}
+    <where>
+      id=#{id}
+    </where>
+  </update>
+  <select id="queryAllClassify" resultType="com.zgtech.portal.dao.entity.PortalClassifyDO">
+    select id ,name,unchecked_url,checked_url
+    from  portal_classify_management
+  </select>
+  <select id="queryClassifyId">
+    select id from  portal_classify_management
+    <where>
+      id=#{id}
+    </where>
+  </select>
+</mapper>

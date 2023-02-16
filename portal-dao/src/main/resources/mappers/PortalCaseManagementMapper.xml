@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zgtech.portal.dao.mapper.PortalCaseManagementMapper">
+ <insert id="savePortalCase" parameterType="com.zgtech.portal.dao.entity.PortalCaseDO">
+     insert into portal_case_management
+     (case_name,classify_id,picture_url,
+     case_video,case_url,summary_description,water_mark_url)
+     values
+     (#{portalCaseDO.caseName} ,#{portalCaseDO.classifyId},#{portalCaseDO.pictureUrl},
+     #{portalCaseDO.caseVideo},#{portalCaseDO.caseUrl},#{portalCaseDO.summaryDescription},
+     #{portalCaseDO.waterMarkUrl} )
+ </insert>
+    <delete id="deletePortalCase">
+        delete from  portal_case_management
+        <where>
+          id = #{id}
+        </where>
+    </delete>
+    <update id="updatePortalCase">
+        update portal_case_management
+        set id=id
+        <if test="portalCaseDO.classifyId != null">
+            ,classify_id=#{portalCaseDO.classifyId}
+        </if>
+        <if test="portalCaseDO.caseName != null and portalCaseDO.caseName != ''">
+            ,case_name =#{portalCaseDO.caseName}
+        </if>
+        <if test="portalCaseDO.caseUrl != null ">
+            ,case_url=#{portalCaseDO.caseUrl}
+        </if>
+        <if test="portalCaseDO.caseVideo != null ">
+            ,case_video=#{portalCaseDO.caseVideo}
+        </if>
+        <if test="portalCaseDO.summaryDescription != null ">
+            ,summary_description=#{portalCaseDO.summaryDescription}
+        </if>
+        <if test="portalCaseDO.pictureUrl != null and portalCaseDO.pictureUrl != ''">
+            ,picture_url=#{portalCaseDO.pictureUrl}
+        </if>
+        <if test="portalCaseDO.waterMarkUrl != null and portalCaseDO.waterMarkUrl != ''">
+            ,water_mark_url=#{portalCaseDO.waterMarkUrl}
+        </if>
+        <where>
+            id =#{portalCaseDO.id}
+        </where>
+    </update>
+    <select id="queryPortalCase" resultType="com.zgtech.portal.dao.entity.PortalCaseDO">
+        select  id,case_name,classify_id,picture_url,picture_url,
+        case_video,case_url,summary_description,water_mark_url
+        from  portal_case_management
+        <where>
+            <if test="classifyId != null and classifyId != ''">
+                classify_id =#{classifyId}
+            </if>
+        </where>
+    </select>
+    <select id="queryAllCaseWaterMark" resultType="java.lang.Integer">
+        select status from portal_case_picture
+    </select>
+</mapper>

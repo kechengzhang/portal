@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zgtech.portal.dao.mapper.PortalCaseFileMapper">
+   <insert id="savePortalCaseFile">
+    insert into portal_case_picture
+    (file_water_maker_url)
+    values
+    (#{portalCasePictureDO.caseWaterMarkUrl}  )
+   </insert>
+    <update id="updatePortalCaseFileStatus">
+        update portal_case_picture set status=#{status,jdbcType=INTEGER}
+        <where>
+            <if test="id != null">
+                id =#{id}
+            </if>
+        </where>
+    </update>
+    <update id="updateCaseWaterMark">
+        update portal_case_management set water_mark_url= #{caseWaterMarkUrl}
+        <where>
+            id=#{id}
+        </where>
+    </update>
+    <select id="queryCaseWaterMarkPicture" resultType="com.zgtech.portal.dao.entity.PortalCaseWaterMarkDO">
+        select id ,status ,file_water_maker_url as caseWaterMarkUrl
+        from portal_case_picture
+    </select>
+    <delete id="deleteCaseWaterMarkPicture">
+        delete from  portal_case_picture
+        <where>
+            id=#{id}
+        </where>
+    </delete>
+    <update id="updateWaterMarkPicture">
+        update portal_case_picture set file_water_maker_url =#{waterMarkUrl}
+    </update>
+</mapper>

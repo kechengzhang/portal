@@ -1,0 +1,13 @@
+spring:
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/zg_portal?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false&serverTimezone=GMT%2B8
+        type: com.alibaba.druid.pool.DruidDataSource
+        username: root
+        password: 1qaz@WSX
+path:
+    file: 'file:'
+    url: /portal/file/
+    filepath: D://file//picture/
+    watermarkpath: D://file//watermark/
+    watermarkiconpath: D://file//watermarkicon/
